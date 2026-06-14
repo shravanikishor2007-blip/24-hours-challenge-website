@@ -33,11 +33,6 @@ CREATE TABLE IF NOT EXISTS journal(
 )
 """)
 
-conn.commit()if st.button("🗑 Clear All Tasks"):
-    cursor.execute("DELETE FROM tasks")
-    conn.commit()
-    st.success("All tasks deleted!")
-
 
 # ---------------- CUSTOM CSS ----------------
 
