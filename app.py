@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS journal(
     entry TEXT
 )
 """)
+conn = sqlite3.connect("journal.db", check_same_thread=False)
 cursor = conn.cursor()
 
 
