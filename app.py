@@ -332,25 +332,7 @@ elif score >= 40:
 
 else:
     st.warning("⚡ Start small and stay consistent!")
-
-if st.button("💾 Save Journal"):
-
-    if journal.strip() != "":
-
-        cursor.execute(
-            """
-            INSERT INTO journal(user_name, entry)
-            VALUES (?, ?)
-            """,
-            (name, journal)
-        )
-
-        conn.commit()
-
-        st.success("✅ Journal Saved Successfully!")
-
-    else:
-        st.warning("Please write something before saving.")
+#----------------journal-------------------
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS journal(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -358,6 +340,30 @@ CREATE TABLE IF NOT EXISTS journal(
     entry TEXT
 )
 """)
+conn.commit()
+
+# ---------------- UI INPUTS ----------------
+journal = st.text_area("Write your journal")
+
+# ---------------- SAVE BUTTON ----------------
+if st.button("💾 Save Journal"):
+
+    if name.strip() == "":
+        st.warning("⚠️ Please enter your name")
+
+    elif journal.strip() == "":
+        st.warning("⚠️ Please write something before saving")
+
+    else:
+        cursor.execute(
+            "INSERT INTO journal (user_name, entry) VALUES (?, ?)",
+            (name, journal)
+        )
+        conn.commit()
+
+        st.success("✅ Journal Saved Successfully!")
+
+
 # ---------------- FOOTER ----------------
 
 st.write("---")
