@@ -333,7 +333,7 @@ elif score >= 40:
 else:
     st.warning("⚡ Start small and stay consistent!")
 
-if st.button("Save Journal"):
+if st.button("💾 Save Journal"):
 
     if journal.strip() != "":
 
@@ -347,22 +347,17 @@ if st.button("Save Journal"):
 
         conn.commit()
 
-        st.success("Journal Saved Successfully ✅")
-st.subheader("📚 My Previous Journals")
+        st.success("✅ Journal Saved Successfully!")
 
+    else:
+        st.warning("Please write something before saving.")
 cursor.execute("""
-SELECT entry
-FROM journal
-WHERE user_name = ?
-ORDER BY id DESC
-""", (name,))
-
-entries = cursor.fetchall()
-
-if entries:
-    for entry in entries:
-        st.write("•", entry[0])
-
+CREATE TABLE IF NOT EXISTS journal(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_name TEXT,
+    entry TEXT
+)
+""")
 # ---------------- FOOTER ----------------
 
 st.write("---")
