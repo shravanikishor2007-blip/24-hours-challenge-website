@@ -32,6 +32,8 @@ CREATE TABLE IF NOT EXISTS journal(
     entry TEXT
 )
 """)
+cursor = conn.cursor()
+
 
 
 # ---------------- CUSTOM CSS ----------------
@@ -342,7 +344,7 @@ CREATE TABLE IF NOT EXISTS journal(
 """)
 conn.commit()
 
-# ---------------- UI INPUTS ----------------
+# ---------------- UI INPUTS ----------------s
 journal = st.text_area("Write your journal")
 
 # ---------------- SAVE BUTTON ----------------
